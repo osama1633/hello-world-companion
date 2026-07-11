@@ -3,16 +3,11 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import astronautVideo from "@/assets/astronaut-cinematic.mp4.asset.json";
 import astronautVideoWebm from "@/assets/astronaut-cinematic.webm.asset.json";
-import planetAureliaVideo from "@/assets/planet-aurelia.mp4.asset.json";
-import planetAureliaVideoWebm from "@/assets/planet-aurelia.webm.asset.json";
-import planetSeleneVideo from "@/assets/planet-selene.mp4.asset.json";
-import planetSeleneVideoWebm from "@/assets/planet-selene.webm.asset.json";
-import planetNyxVideo from "@/assets/planet-nyx.mp4.asset.json";
-import planetNyxVideoWebm from "@/assets/planet-nyx.webm.asset.json";
 import astronautImg from "@/assets/astronaut-portrait.jpg";
 import planetImg from "@/assets/planet.jpg";
 import moonImg from "@/assets/moon-scene.jpg";
 import { Starfield } from "@/components/space/Starfield";
+import { AnimatedPlanet } from "@/components/space/AnimatedPlanet";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -25,7 +20,6 @@ function Index() {
   const titleScale = useTransform(scrollYProgress, [0, 0.4], [1, 1.4]);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const [activeVideo, setActiveVideo] = useState<null | 0 | 1 | 2>(null);
-  const [videoReady, setVideoReady] = useState(false);
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
