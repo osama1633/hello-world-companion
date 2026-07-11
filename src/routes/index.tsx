@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import astronautVideo from "@/assets/astronaut-cinematic.mp4.asset.json";
+import astronautPlanetVideo from "@/assets/astronaut-planet.mp4.asset.json";
 import astronautImg from "@/assets/astronaut-portrait.jpg";
 import planetImg from "@/assets/planet.jpg";
 import moonImg from "@/assets/moon-scene.jpg";
@@ -18,6 +19,35 @@ function Index() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
   const titleScale = useTransform(scrollYProgress, [0, 0.4], [1, 1.4]);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const [reelOpen, setReelOpen] = useState(false);
+  const [activePlanet, setActivePlanet] = useState(0);
+
+  const reelPlanets = [
+    {
+      name: "Aurelia Blue-9",
+      cat: "Gas Giant · Neptune-class",
+      dist: "4.2 light years",
+      color: "from-blue-400 via-indigo-500 to-purple-700",
+      ring: "border-blue-300/40",
+      img: planetImg,
+    },
+    {
+      name: "Selene Prime",
+      cat: "Lunar · Iron-rich",
+      dist: "0.03 light years",
+      color: "from-slate-300 via-slate-500 to-slate-800",
+      ring: "border-slate-200/40",
+      img: moonImg,
+    },
+    {
+      name: "Nyx Ember",
+      cat: "Nebula Cluster",
+      dist: "1,250 light years",
+      color: "from-fuchsia-400 via-rose-500 to-orange-500",
+      ring: "border-fuchsia-300/40",
+      img: astronautImg,
+    },
+  ];
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
@@ -129,6 +159,10 @@ function Index() {
             </a>
             <a
               href="#planets"
+              onClick={(e) => {
+                e.preventDefault();
+                setReelOpen(true);
+              }}
               className="glass rounded-full px-8 py-3 text-sm font-medium text-white transition hover:bg-white/10"
             >
               Watch Reel
