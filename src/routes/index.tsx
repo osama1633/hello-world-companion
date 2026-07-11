@@ -236,25 +236,22 @@ function Index() {
             transition={{ duration: 1, delay: 0.2 }}
             className="relative md:col-span-7"
           >
-            <div
-              className="relative overflow-hidden rounded-2xl border border-white/10"
-              style={{
-                transform: `perspective(1200px) rotateY(${mouse.x * -4}deg) rotateX(${mouse.y * 4}deg)`,
-                transition: "transform 0.2s ease-out",
-              }}
-            >
-              <img
-                src={astronautImg}
-                alt="Astronaut portrait"
-                width={1408}
-                height={1808}
-                loading="lazy"
+            <div className="relative overflow-hidden rounded-2xl border border-white/10">
+              <video
+                src={astronautPlanetVideo.url}
+                autoPlay
+                loop
+                muted
+                playsInline
                 className="h-[600px] w-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#05060d] via-transparent to-transparent" />
               <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-white/70">
-                <span>Subject / Aurelia Blue-9</span>
-                <span>{`0${Math.floor(Math.random() * 9)}:${Math.floor(Math.random() * 59)}:${Math.floor(Math.random() * 59)}`}</span>
+                <span>Live Feed / Deep Field</span>
+                <span className="flex items-center gap-2">
+                  <span className="h-2 w-2 animate-pulse rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.9)]" />
+                  REC · LIVE
+                </span>
               </div>
               {/* corner brackets */}
               {["top-3 left-3 border-t border-l", "top-3 right-3 border-t border-r", "bottom-3 left-3 border-b border-l", "bottom-3 right-3 border-b border-r"].map((c, i) => (
