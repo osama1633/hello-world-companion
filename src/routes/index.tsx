@@ -78,15 +78,15 @@ function Index() {
           className="absolute inset-0"
         >
           <video
-            className="h-full w-full object-cover opacity-70"
+            className="h-full w-full object-cover"
             src={astronautVideo.url}
             autoPlay
             loop
             muted
             playsInline
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#05060d]/40 via-transparent to-[#05060d]" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#05060d_85%)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#05060d]/30 via-transparent to-[#05060d]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,#05060d_92%)]" />
         </motion.div>
 
         {/* Rotating orbit ring */}
