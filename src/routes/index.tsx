@@ -1,13 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import astronautVideo from "@/assets/astronaut-cinematic.mp4.asset.json";
-import astronautPlanetVideo from "@/assets/astronaut-planet.mp4.asset.json";
+import planetAureliaVideo from "@/assets/planet-aurelia.mp4.asset.json";
+import planetSeleneVideo from "@/assets/planet-selene.mp4.asset.json";
+import planetNyxVideo from "@/assets/planet-nyx.mp4.asset.json";
 import astronautImg from "@/assets/astronaut-portrait.jpg";
 import planetImg from "@/assets/planet.jpg";
 import moonImg from "@/assets/moon-scene.jpg";
 import { Starfield } from "@/components/space/Starfield";
-import { CosmicCursor } from "@/components/space/CosmicCursor";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -19,35 +20,7 @@ function Index() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
   const titleScale = useTransform(scrollYProgress, [0, 0.4], [1, 1.4]);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
-  const [reelOpen, setReelOpen] = useState(false);
-  const [activePlanet, setActivePlanet] = useState(0);
-
-  const reelPlanets = [
-    {
-      name: "Aurelia Blue-9",
-      cat: "Gas Giant · Neptune-class",
-      dist: "4.2 light years",
-      color: "from-blue-400 via-indigo-500 to-purple-700",
-      ring: "border-blue-300/40",
-      img: planetImg,
-    },
-    {
-      name: "Selene Prime",
-      cat: "Lunar · Iron-rich",
-      dist: "0.03 light years",
-      color: "from-slate-300 via-slate-500 to-slate-800",
-      ring: "border-slate-200/40",
-      img: moonImg,
-    },
-    {
-      name: "Nyx Ember",
-      cat: "Nebula Cluster",
-      dist: "1,250 light years",
-      color: "from-fuchsia-400 via-rose-500 to-orange-500",
-      ring: "border-fuchsia-300/40",
-      img: astronautImg,
-    },
-  ];
+  const [activeVideo, setActiveVideo] = useState<null | 0 | 1 | 2>(null);
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
