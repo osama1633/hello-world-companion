@@ -1,9 +1,11 @@
 {
   "version": 1,
-  "asset_id": "60520c52-a9d4-4790-8a0e-a37f91601750",
+  "asset_id": "6ac9b773-9fc8-43b1-b516-971a86927582",
   "project_id": "0b8f4010-def0-46a7-ac6c-9fedd9c326b6",
-  "url": "/__l5e/assets-v1/60520c52-a9d4-4790-8a0e-a37f91601750/astronaut-cinematic.mp4",
+  "url": "/__l5e/assets-v1/6ac9b773-9fc8-43b1-b516-971a86927582/astronaut-cinematic.mp4",
+  "r2_key": "a/v1/0b8f4010-def0-46a7-ac6c-9fedd9c326b6/6ac9b773-9fc8-43b1-b516-971a86927582/astronaut-cinematic.mp4",
   "original_filename": "astronaut-cinematic.mp4",
-  "size": 20885115,
-  "created_at": "2026-07-11T19:36:06Z"
+  "size": 701321,
+  "content_type": "video/mp4",
+  "created_at": "2026-07-11T20:05:18Z"
 }
