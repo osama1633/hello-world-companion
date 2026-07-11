@@ -11,6 +11,9 @@ const astronautVideoWebm = "/videos/astronaut-cinematic.webm";
 const reelSpacewalk = "/videos/reel-spacewalk.mp4";
 const reelMoonwalk = "/videos/reel-moonwalk.mp4";
 const reelNebula = "/videos/reel-nebula.mp4";
+const reelSpacewalkWebm = "/videos/reel-spacewalk.webm";
+const reelMoonwalkWebm = "/videos/reel-moonwalk.webm";
+const reelNebulaWebm = "/videos/reel-nebula.webm";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -443,9 +446,9 @@ function Index() {
         {activeVideo !== null && (
           (() => {
             const scenes = [
-              { src: reelSpacewalk, poster: planetImg, name: "Aurelia Blue-9", cat: "Gas Giant · Neptune-class", dist: "4.2 light years" },
-              { src: reelMoonwalk, poster: moonImg, name: "Selene Prime", cat: "Lunar · Iron-rich", dist: "0.03 light years" },
-              { src: reelNebula, poster: astronautImg, name: "Nyx Ember", cat: "Nebula Cluster", dist: "1,250 light years" },
+              { src: reelSpacewalk, webm: reelSpacewalkWebm, poster: planetImg, name: "Aurelia Blue-9", cat: "Gas Giant · Neptune-class", dist: "4.2 light years" },
+              { src: reelMoonwalk, webm: reelMoonwalkWebm, poster: moonImg, name: "Selene Prime", cat: "Lunar · Iron-rich", dist: "0.03 light years" },
+              { src: reelNebula, webm: reelNebulaWebm, poster: astronautImg, name: "Nyx Ember", cat: "Nebula Cluster", dist: "1,250 light years" },
             ];
             const v = scenes[activeVideo];
             return (
@@ -493,6 +496,7 @@ function Index() {
                       onError={() => setVideoReady(true)}
                       className="h-full w-full object-cover"
                     >
+                      <source src={v.webm} type="video/webm" />
                       <source src={v.src} type="video/mp4" />
                     </video>
                     {!videoReady && (
