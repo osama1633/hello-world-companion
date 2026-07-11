@@ -68,6 +68,7 @@ function Index() {
             loop
             muted
             playsInline
+            preload="auto"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#05060d]/30 via-transparent to-[#05060d]" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,#05060d_92%)]" />
@@ -210,6 +211,8 @@ function Index() {
                 loop
                 muted
                 playsInline
+                preload="metadata"
+                poster={planetImg}
                 className="h-[600px] w-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#05060d] via-transparent to-transparent" />
@@ -472,6 +475,8 @@ function Index() {
                       loop
                       controls
                       playsInline
+                      muted
+                      preload="auto"
                       className="h-full w-full object-cover"
                     />
                     {["top-3 left-3 border-t border-l", "top-3 right-3 border-t border-r", "bottom-3 left-3 border-b border-l", "bottom-3 right-3 border-b border-r"].map((c, i) => (
