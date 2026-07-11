@@ -15,8 +15,8 @@ export function CosmicCursor() {
       }
     };
     const loop = () => {
-      rx += (x - rx) * 0.12;
-      ry += (y - ry) * 0.12;
+      rx += (x - rx) * 0.45;
+      ry += (y - ry) * 0.45;
       if (ringRef.current) {
         ringRef.current.style.transform = `translate(${rx}px, ${ry}px)`;
       }
