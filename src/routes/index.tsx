@@ -21,6 +21,7 @@ function Index() {
   const titleScale = useTransform(scrollYProgress, [0, 0.4], [1, 1.4]);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const [activeVideo, setActiveVideo] = useState<null | 0 | 1 | 2>(null);
+  const [videoReady, setVideoReady] = useState(false);
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
@@ -263,7 +264,10 @@ function Index() {
               <motion.button
                 key={p.name}
                 type="button"
-                onClick={() => setActiveVideo(p.id)}
+                onClick={() => {
+                  setVideoReady(false);
+                  setActiveVideo(p.id);
+                }}
                 initial={{ opacity: 0, y: 60 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
@@ -432,9 +436,9 @@ function Index() {
         {activeVideo !== null && (
           (() => {
             const videos = [
-              { url: planetAureliaVideo.url, name: "Aurelia Blue-9", cat: "Gas Giant · Neptune-class", dist: "4.2 light years" },
-              { url: planetSeleneVideo.url, name: "Selene Prime", cat: "Lunar · Iron-rich", dist: "0.03 light years" },
-              { url: planetNyxVideo.url, name: "Nyx Ember", cat: "Nebula Cluster", dist: "1,250 light years" },
+              { url: planetAureliaVideo.url, poster: planetImg, name: "Aurelia Blue-9", cat: "Gas Giant · Neptune-class", dist: "4.2 light years" },
+              { url: planetSeleneVideo.url, poster: moonImg, name: "Selene Prime", cat: "Lunar · Iron-rich", dist: "0.03 light years" },
+              { url: planetNyxVideo.url, poster: astronautImg, name: "Nyx Ember", cat: "Nebula Cluster", dist: "1,250 light years" },
             ];
             const v = videos[activeVideo];
             return (
@@ -471,14 +475,26 @@ function Index() {
                     <video
                       key={v.url}
                       src={v.url}
+                      poster={v.poster}
                       autoPlay
                       loop
                       controls
                       playsInline
                       muted
                       preload="auto"
+                      onLoadedData={() => setVideoReady(true)}
+                      onPlaying={() => setVideoReady(true)}
+                      onError={() => setVideoReady(true)}
                       className="h-full w-full object-cover"
                     />
+                    {!videoReady && (
+                      <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/35 backdrop-blur-sm">
+                        <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.3em] text-white/70">
+                          <span className="h-2 w-2 animate-pulse rounded-full bg-white" />
+                          Loading transmission
+                        </div>
+                      </div>
+                    )}
                     {["top-3 left-3 border-t border-l", "top-3 right-3 border-t border-r", "bottom-3 left-3 border-b border-l", "bottom-3 right-3 border-b border-r"].map((c, i) => (
                       <span key={i} className={`pointer-events-none absolute h-6 w-6 border-white/40 ${c}`} />
                     ))}
