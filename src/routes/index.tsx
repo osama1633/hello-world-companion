@@ -426,115 +426,77 @@ function Index() {
       </footer>
 
       <AnimatePresence>
-        {reelOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/85 p-4 backdrop-blur-2xl"
-            onClick={() => setReelOpen(false)}
-          >
-            <Starfield count={220} />
-            <div className="pointer-events-none absolute inset-0 overflow-hidden">
-              <div className="absolute -left-40 top-1/4 h-[600px] w-[600px] animate-pulse rounded-full opacity-30 blur-3xl" style={{ background: "radial-gradient(circle, #8b5cf6, transparent 70%)" }} />
-              <div className="absolute -right-40 bottom-1/4 h-[700px] w-[700px] animate-pulse rounded-full opacity-30 blur-3xl" style={{ background: "radial-gradient(circle, #3b82f6, transparent 70%)", animationDelay: "1s" }} />
-            </div>
-
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative z-10 flex max-h-[92vh] w-full max-w-6xl flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#05060d]/60 p-6 backdrop-blur-xl md:p-10"
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.3em] text-white/60">
-                  <span className="h-2 w-2 animate-pulse rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.9)]" />
-                  Reel · Live Broadcast
-                </div>
-                <button
-                  onClick={() => setReelOpen(false)}
-                  className="glass rounded-full px-4 py-2 font-mono text-[10px] uppercase tracking-[0.3em] hover:bg-white/10"
+        {activeVideo !== null && (
+          (() => {
+            const videos = [
+              { url: planetAureliaVideo.url, name: "Aurelia Blue-9", cat: "Gas Giant · Neptune-class", dist: "4.2 light years" },
+              { url: planetSeleneVideo.url, name: "Selene Prime", cat: "Lunar · Iron-rich", dist: "0.03 light years" },
+              { url: planetNyxVideo.url, name: "Nyx Ember", cat: "Nebula Cluster", dist: "1,250 light years" },
+            ];
+            const v = videos[activeVideo];
+            return (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 p-4"
+                onClick={() => setActiveVideo(null)}
+              >
+                <motion.div
+                  initial={{ scale: 0.94, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.94, opacity: 0 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="relative w-full max-w-5xl overflow-hidden rounded-2xl border border-white/10 bg-[#05060d] shadow-[0_0_80px_rgba(139,92,246,0.25)]"
                 >
-                  Close ✕
-                </button>
-              </div>
-
-              <div className="relative mt-6 flex aspect-[16/10] items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-black/40">
-                <Starfield count={120} />
-                <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-                  <div className="absolute h-[120%] w-[120%] rounded-full border border-white/5" style={{ animation: "spin 60s linear infinite" }} />
-                  <div className="absolute h-[85%] w-[85%] rounded-full border border-white/10" style={{ animation: "spin 40s linear infinite reverse" }} />
-                  <div className="absolute h-[55%] w-[55%] rounded-full border border-white/10" style={{ animation: "spin 25s linear infinite" }} />
-                </div>
-
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activePlanet}
-                    initial={{ scale: 0.5, opacity: 0, rotate: -30 }}
-                    animate={{ scale: 1, opacity: 1, rotate: 0 }}
-                    exit={{ scale: 0.5, opacity: 0, rotate: 30 }}
-                    transition={{ duration: 0.7, ease: "easeOut" }}
-                    className="relative"
-                  >
-                    <div
-                      className={`relative h-56 w-56 overflow-hidden rounded-full bg-gradient-to-br ${reelPlanets[activePlanet].color} shadow-[0_0_120px_rgba(139,92,246,0.6)] md:h-80 md:w-80`}
-                      style={{ animation: "spin 30s linear infinite" }}
+                  <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
+                    <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.3em] text-white/60">
+                      <span className="h-2 w-2 animate-pulse rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.9)]" />
+                      Now Playing · {v.name}
+                    </div>
+                    <button
+                      onClick={() => setActiveVideo(null)}
+                      aria-label="Close"
+                      className="glass rounded-full px-4 py-2 font-mono text-[10px] uppercase tracking-[0.3em] hover:bg-white/10"
                     >
-                      <img src={reelPlanets[activePlanet].img} alt="" className="absolute inset-0 h-full w-full object-cover opacity-70 mix-blend-overlay" />
-                      <div className="absolute inset-0 bg-gradient-to-tr from-black/60 via-transparent to-white/20" />
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-
-                <div className="pointer-events-none absolute inset-0" style={{ animation: "spin 15s linear infinite" }}>
-                  <span className="absolute left-1/2 top-[10%] h-3 w-3 -translate-x-1/2 rounded-full bg-white shadow-[0_0_20px_rgba(255,255,255,0.9)]" />
-                </div>
-                <div className="pointer-events-none absolute inset-0" style={{ animation: "spin 22s linear infinite reverse" }}>
-                  <span className="absolute left-[6%] top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-purple-300 shadow-[0_0_16px_rgba(168,85,247,0.9)]" />
-                </div>
-
-                <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-white/70">
-                  <div>
-                    <div className="text-white/40">Now Observing</div>
-                    <div className="font-serif mt-2 text-2xl normal-case tracking-normal text-white md:text-4xl">
-                      {reelPlanets[activePlanet].name}
-                    </div>
-                    <div className="mt-1 text-white/50">{reelPlanets[activePlanet].cat}</div>
+                      Close ✕
+                    </button>
                   </div>
-                  <div className="hidden text-right md:block">
-                    <div className="text-white/40">Distance</div>
-                    <div className="mt-2 font-serif text-lg normal-case text-white">{reelPlanets[activePlanet].dist}</div>
+                  <div className="relative aspect-video w-full bg-black">
+                    <video
+                      key={v.url}
+                      src={v.url}
+                      autoPlay
+                      loop
+                      controls
+                      playsInline
+                      className="h-full w-full object-cover"
+                    />
+                    {["top-3 left-3 border-t border-l", "top-3 right-3 border-t border-r", "bottom-3 left-3 border-b border-l", "bottom-3 right-3 border-b border-r"].map((c, i) => (
+                      <span key={i} className={`pointer-events-none absolute h-6 w-6 border-white/40 ${c}`} />
+                    ))}
                   </div>
-                </div>
-              </div>
-
-              <div className="mt-6 grid grid-cols-3 gap-3">
-                {reelPlanets.map((p, i) => (
-                  <button
-                    key={p.name}
-                    onClick={() => setActivePlanet(i)}
-                    className={`group relative overflow-hidden rounded-xl border p-3 text-left transition ${
-                      i === activePlanet ? "border-white/40 bg-white/10" : "border-white/10 bg-white/[0.02] hover:bg-white/5"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div
-                        className={`h-10 w-10 shrink-0 rounded-full bg-gradient-to-br ${p.color} shadow-[0_0_20px_rgba(139,92,246,0.5)]`}
-                        style={{ animation: "spin 12s linear infinite" }}
-                      />
-                      <div className="min-w-0">
-                        <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/50">0{i + 1}</div>
-                        <div className="truncate font-serif text-base text-white">{p.name}</div>
+                  <div className="flex flex-col gap-2 border-t border-white/10 px-6 py-4 md:flex-row md:items-end md:justify-between">
+                    <div>
+                      <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
+                        Featured World
+                      </div>
+                      <div className="font-serif mt-2 text-3xl">{v.name}</div>
+                      <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.25em] text-white/50">
+                        {v.cat}
                       </div>
                     </div>
-                  </button>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
+                    <div className="text-left md:text-right">
+                      <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">Distance</div>
+                      <div className="font-serif mt-1 text-lg text-white">{v.dist}</div>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            );
+          })()
         )}
       </AnimatePresence>
     </div>
