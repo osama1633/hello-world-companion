@@ -1,9 +1,11 @@
 {
   "version": 1,
-  "asset_id": "5d02ce25-c7a3-4fec-bb59-eac0e7e8978e",
+  "asset_id": "7630ea69-517b-4e6f-897b-78a197d91645",
   "project_id": "0b8f4010-def0-46a7-ac6c-9fedd9c326b6",
-  "url": "/__l5e/assets-v1/5d02ce25-c7a3-4fec-bb59-eac0e7e8978e/planet-selene.mp4",
+  "url": "/__l5e/assets-v1/7630ea69-517b-4e6f-897b-78a197d91645/planet-selene.mp4",
+  "r2_key": "a/v1/0b8f4010-def0-46a7-ac6c-9fedd9c326b6/7630ea69-517b-4e6f-897b-78a197d91645/planet-selene.mp4",
   "original_filename": "planet-selene.mp4",
-  "size": 15385030,
-  "created_at": "2026-07-11T19:53:56Z"
+  "size": 773217,
+  "content_type": "video/mp4",
+  "created_at": "2026-07-11T20:04:24Z"
 }
