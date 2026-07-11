@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import astronautVideo from "@/assets/astronaut-hero.mp4.asset.json";
+import astronautVideo from "@/assets/astronaut-cinematic.mp4.asset.json";
 import astronautImg from "@/assets/astronaut-portrait.jpg";
 import planetImg from "@/assets/planet.jpg";
 import moonImg from "@/assets/moon-scene.jpg";
@@ -50,23 +50,6 @@ function Index() {
           Book a Flight
         </button>
       </header>
-
-      {/* WhatsApp floating button */}
-      <a
-        href="https://wa.me/201221996350?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Chat on WhatsApp"
-        className="group fixed bottom-6 right-6 z-[60] flex items-center gap-3 rounded-full bg-[#25D366] px-5 py-3 font-medium text-white shadow-[0_0_30px_rgba(37,211,102,0.55)] transition hover:scale-105 hover:shadow-[0_0_45px_rgba(37,211,102,0.9)]"
-      >
-        <span className="absolute inset-0 -z-10 animate-ping rounded-full bg-[#25D366]/40" />
-        <svg viewBox="0 0 32 32" className="h-6 w-6 fill-white" aria-hidden>
-          <path d="M19.11 17.28c-.28-.14-1.65-.81-1.9-.9-.26-.09-.44-.14-.63.14-.19.28-.72.9-.88 1.09-.16.19-.32.21-.6.07-.28-.14-1.17-.43-2.23-1.37-.83-.74-1.38-1.65-1.54-1.93-.16-.28-.02-.43.12-.57.13-.13.28-.32.42-.49.14-.16.19-.28.28-.47.09-.19.05-.35-.02-.49-.07-.14-.63-1.52-.86-2.08-.23-.55-.46-.48-.63-.49l-.54-.01c-.19 0-.49.07-.75.35-.26.28-.98.96-.98 2.34s1 2.72 1.14 2.9c.14.19 1.97 3.01 4.78 4.22.67.29 1.19.46 1.6.59.67.21 1.28.18 1.76.11.54-.08 1.65-.67 1.88-1.32.23-.65.23-1.2.16-1.32-.07-.11-.25-.18-.53-.32zM16.02 4C9.4 4 4.03 9.37 4.03 15.99c0 2.11.55 4.17 1.6 5.99L4 28l6.19-1.62a11.94 11.94 0 0 0 5.83 1.5h.01c6.62 0 11.99-5.37 11.99-11.99S22.65 4 16.02 4z"/>
-        </svg>
-        <span className="hidden font-mono text-xs uppercase tracking-[0.25em] sm:inline">
-          WhatsApp
-        </span>
-      </a>
 
       {/* HERO */}
       <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
@@ -402,6 +385,26 @@ function Index() {
               Reserve
             </button>
           </form>
+
+          <div className="mt-10 flex flex-col items-center gap-4">
+            <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-white/40">
+              — Direct Channel —
+            </span>
+            <a
+              href="https://wa.me/201221996350?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%B1%D8%AD%D9%84%D8%A9%20%D8%A3%D9%88%D8%B1%D9%8A%D9%84%D9%8A%D8%A7"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-[#25D366] px-8 py-4 font-medium text-white shadow-[0_0_40px_rgba(37,211,102,0.4)] transition hover:scale-105 hover:shadow-[0_0_60px_rgba(37,211,102,0.8)]"
+            >
+              <svg viewBox="0 0 32 32" className="h-6 w-6 fill-white" aria-hidden>
+                <path d="M19.11 17.28c-.28-.14-1.65-.81-1.9-.9-.26-.09-.44-.14-.63.14-.19.28-.72.9-.88 1.09-.16.19-.32.21-.6.07-.28-.14-1.17-.43-2.23-1.37-.83-.74-1.38-1.65-1.54-1.93-.16-.28-.02-.43.12-.57.13-.13.28-.32.42-.49.14-.16.19-.28.28-.47.09-.19.05-.35-.02-.49-.07-.14-.63-1.52-.86-2.08-.23-.55-.46-.48-.63-.49l-.54-.01c-.19 0-.49.07-.75.35-.26.28-.98.96-.98 2.34s1 2.72 1.14 2.9c.14.19 1.97 3.01 4.78 4.22.67.29 1.19.46 1.6.59.67.21 1.28.18 1.76.11.54-.08 1.65-.67 1.88-1.32.23-.65.23-1.2.16-1.32-.07-.11-.25-.18-.53-.32zM16.02 4C9.4 4 4.03 9.37 4.03 15.99c0 2.11.55 4.17 1.6 5.99L4 28l6.19-1.62a11.94 11.94 0 0 0 5.83 1.5h.01c6.62 0 11.99-5.37 11.99-11.99S22.65 4 16.02 4z"/>
+              </svg>
+              <span className="text-sm uppercase tracking-[0.25em]">
+                Chat on WhatsApp
+              </span>
+              <span className="font-mono text-xs opacity-80">+20 122 199 6350</span>
+            </a>
+          </div>
         </div>
       </section>
 
