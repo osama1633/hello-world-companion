@@ -207,9 +207,18 @@ function Index() {
             className="relative md:col-span-7"
           >
             <div className="relative overflow-hidden rounded-2xl border border-white/10">
-              <div className="h-[600px] w-full">
-                <AnimatedPlanet variant="aurelia" />
-              </div>
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                poster={astronautImg}
+                className="h-[600px] w-full object-cover"
+              >
+                <source src={astronautVideoWebm.url} type="video/webm" />
+                <source src={astronautVideo.url} type="video/mp4" />
+              </video>
               <div className="absolute inset-0 bg-gradient-to-t from-[#05060d] via-transparent to-transparent" />
               <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-white/70">
                 <span>Live Feed / Deep Field</span>
