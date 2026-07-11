@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import astronautVideo from "@/assets/astronaut-cinematic.mp4.asset.json";
 import astronautVideoWebm from "@/assets/astronaut-cinematic.webm.asset.json";
+import reelMoonwalk from "@/assets/reel-moonwalk.mp4.asset.json";
+import reelSpacewalk from "@/assets/reel-spacewalk.mp4.asset.json";
+import reelNebula from "@/assets/reel-nebula.mp4.asset.json";
 import astronautImg from "@/assets/astronaut-portrait.jpg";
 import planetImg from "@/assets/planet.jpg";
 import moonImg from "@/assets/moon-scene.jpg";
 import { Starfield } from "@/components/space/Starfield";
-import { AnimatedPlanet } from "@/components/space/AnimatedPlanet";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -20,6 +22,7 @@ function Index() {
   const titleScale = useTransform(scrollYProgress, [0, 0.4], [1, 1.4]);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const [activeVideo, setActiveVideo] = useState<null | 0 | 1 | 2>(null);
+  const [videoReady, setVideoReady] = useState(false);
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
@@ -268,6 +271,7 @@ function Index() {
                 key={p.name}
                 type="button"
                 onClick={() => {
+                  setVideoReady(false);
                   setActiveVideo(p.id);
                 }}
                 initial={{ opacity: 0, y: 60 }}
@@ -438,9 +442,9 @@ function Index() {
         {activeVideo !== null && (
           (() => {
             const scenes = [
-              { variant: "aurelia" as const, name: "Aurelia Blue-9", cat: "Gas Giant · Neptune-class", dist: "4.2 light years" },
-              { variant: "selene" as const, name: "Selene Prime", cat: "Lunar · Iron-rich", dist: "0.03 light years" },
-              { variant: "nyx" as const, name: "Nyx Ember", cat: "Nebula Cluster", dist: "1,250 light years" },
+              { src: reelSpacewalk.url, poster: planetImg, name: "Aurelia Blue-9", cat: "Gas Giant · Neptune-class", dist: "4.2 light years" },
+              { src: reelMoonwalk.url, poster: moonImg, name: "Selene Prime", cat: "Lunar · Iron-rich", dist: "0.03 light years" },
+              { src: reelNebula.url, poster: astronautImg, name: "Nyx Ember", cat: "Nebula Cluster", dist: "1,250 light years" },
             ];
             const v = scenes[activeVideo];
             return (
@@ -474,7 +478,30 @@ function Index() {
                     </button>
                   </div>
                   <div className="relative aspect-video w-full bg-black">
-                    <AnimatedPlanet variant={v.variant} />
+                    <video
+                      key={v.src}
+                      poster={v.poster}
+                      autoPlay
+                      loop
+                      controls
+                      playsInline
+                      muted
+                      preload="auto"
+                      onLoadedData={() => setVideoReady(true)}
+                      onPlaying={() => setVideoReady(true)}
+                      onError={() => setVideoReady(true)}
+                      className="h-full w-full object-cover"
+                    >
+                      <source src={v.src} type="video/mp4" />
+                    </video>
+                    {!videoReady && (
+                      <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/35 backdrop-blur-sm">
+                        <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.3em] text-white/70">
+                          <span className="h-2 w-2 animate-pulse rounded-full bg-white" />
+                          Loading transmission
+                        </div>
+                      </div>
+                    )}
                     {["top-3 left-3 border-t border-l", "top-3 right-3 border-t border-r", "bottom-3 left-3 border-b border-l", "bottom-3 right-3 border-b border-r"].map((c, i) => (
                       <span key={i} className={`pointer-events-none absolute h-6 w-6 border-white/40 ${c}`} />
                     ))}
