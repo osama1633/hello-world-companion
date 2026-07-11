@@ -35,8 +35,6 @@ function Index() {
 
   return (
     <div className="starfield relative min-h-screen text-white">
-      <CosmicCursor />
-
       {/* NAV */}
       <header className="fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-6 py-6 md:px-12">
         <a href="#" className="flex items-center gap-2 font-mono text-sm tracking-[0.3em]">
@@ -132,13 +130,9 @@ function Index() {
             </a>
             <a
               href="#planets"
-              onClick={(e) => {
-                e.preventDefault();
-                setReelOpen(true);
-              }}
               className="glass rounded-full px-8 py-3 text-sm font-medium text-white transition hover:bg-white/10"
             >
-              Watch Reel
+              Explore Worlds
             </a>
           </motion.div>
         </motion.div>
@@ -211,7 +205,7 @@ function Index() {
           >
             <div className="relative overflow-hidden rounded-2xl border border-white/10">
               <video
-                src={astronautPlanetVideo.url}
+                src={planetAureliaVideo.url}
                 autoPlay
                 loop
                 muted
@@ -259,17 +253,19 @@ function Index() {
 
           <div className="mt-16 grid gap-8 md:grid-cols-3">
             {[
-              { name: "Aurelia Blue-9", cat: "Gas Giant · Neptune-class", dist: "4.2 ly", img: planetImg },
-              { name: "Selene Prime", cat: "Lunar · Iron-rich", dist: "0.03 ly", img: moonImg },
-              { name: "Nyx Ember", cat: "Nebula Cluster", dist: "1,250 ly", img: astronautImg },
+              { name: "Aurelia Blue-9", cat: "Gas Giant · Neptune-class", dist: "4.2 ly", img: planetImg, id: 0 as const },
+              { name: "Selene Prime", cat: "Lunar · Iron-rich", dist: "0.03 ly", img: moonImg, id: 1 as const },
+              { name: "Nyx Ember", cat: "Nebula Cluster", dist: "1,250 ly", img: astronautImg, id: 2 as const },
             ].map((p, i) => (
-              <motion.article
+              <motion.button
                 key={p.name}
+                type="button"
+                onClick={() => setActiveVideo(p.id)}
                 initial={{ opacity: 0, y: 60 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.8, delay: i * 0.15 }}
-                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02]"
+                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] text-left focus:outline-none focus:ring-2 focus:ring-white/40"
               >
                 <div className="relative aspect-[3/4] overflow-hidden">
                   <img
@@ -279,6 +275,14 @@ function Index() {
                     className="h-full w-full object-cover transition duration-[1200ms] group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#05060d] via-[#05060d]/30 to-transparent" />
+                  {/* Play overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 transition duration-500 group-hover:opacity-100">
+                    <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/40 bg-black/40 backdrop-blur-sm">
+                      <svg viewBox="0 0 24 24" className="ml-1 h-6 w-6 fill-white" aria-hidden>
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </span>
+                  </div>
                 </div>
                 <div className="absolute inset-x-0 bottom-0 p-6">
                   <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-white/50">
@@ -290,7 +294,7 @@ function Index() {
                     {p.cat}
                   </p>
                 </div>
-              </motion.article>
+              </motion.button>
             ))}
           </div>
         </div>
