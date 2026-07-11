@@ -1,15 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
-import astronautVideo from "@/assets/astronaut-cinematic.mp4.asset.json";
-import astronautVideoWebm from "@/assets/astronaut-cinematic.webm.asset.json";
-import reelMoonwalk from "@/assets/reel-moonwalk.mp4.asset.json";
-import reelSpacewalk from "@/assets/reel-spacewalk.mp4.asset.json";
-import reelNebula from "@/assets/reel-nebula.mp4.asset.json";
 import astronautImg from "@/assets/astronaut-portrait.jpg";
 import planetImg from "@/assets/planet.jpg";
 import moonImg from "@/assets/moon-scene.jpg";
 import { Starfield } from "@/components/space/Starfield";
+
+const astronautVideo = "/videos/astronaut-cinematic.mp4";
+const astronautVideoWebm = "/videos/astronaut-cinematic.webm";
+const reelSpacewalk = "/videos/reel-spacewalk.mp4";
+const reelMoonwalk = "/videos/reel-moonwalk.mp4";
+const reelNebula = "/videos/reel-nebula.mp4";
+const reelSpacewalkWebm = "/videos/reel-spacewalk.webm";
+const reelMoonwalkWebm = "/videos/reel-moonwalk.webm";
+const reelNebulaWebm = "/videos/reel-nebula.webm";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -69,11 +73,11 @@ function Index() {
             loop
             muted
             playsInline
-            preload="metadata"
+            preload="auto"
             poster={planetImg}
           >
-            <source src={astronautVideoWebm.url} type="video/webm" />
-            <source src={astronautVideo.url} type="video/mp4" />
+            <source src={astronautVideoWebm} type="video/webm" />
+            <source src={astronautVideo} type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-[#05060d]/30 via-transparent to-[#05060d]" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,#05060d_92%)]" />
@@ -215,12 +219,12 @@ function Index() {
                 loop
                 muted
                 playsInline
-                preload="metadata"
+                preload="auto"
                 poster={astronautImg}
                 className="h-[600px] w-full object-cover"
               >
-                <source src={astronautVideoWebm.url} type="video/webm" />
-                <source src={astronautVideo.url} type="video/mp4" />
+                <source src={astronautVideoWebm} type="video/webm" />
+                <source src={astronautVideo} type="video/mp4" />
               </video>
               <div className="absolute inset-0 bg-gradient-to-t from-[#05060d] via-transparent to-transparent" />
               <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between font-mono text-[10px] uppercase tracking-[0.3em] text-white/70">
@@ -442,9 +446,9 @@ function Index() {
         {activeVideo !== null && (
           (() => {
             const scenes = [
-              { src: reelSpacewalk.url, poster: planetImg, name: "Aurelia Blue-9", cat: "Gas Giant · Neptune-class", dist: "4.2 light years" },
-              { src: reelMoonwalk.url, poster: moonImg, name: "Selene Prime", cat: "Lunar · Iron-rich", dist: "0.03 light years" },
-              { src: reelNebula.url, poster: astronautImg, name: "Nyx Ember", cat: "Nebula Cluster", dist: "1,250 light years" },
+              { src: reelSpacewalk, webm: reelSpacewalkWebm, poster: planetImg, name: "Aurelia Blue-9", cat: "Gas Giant · Neptune-class", dist: "4.2 light years" },
+              { src: reelMoonwalk, webm: reelMoonwalkWebm, poster: moonImg, name: "Selene Prime", cat: "Lunar · Iron-rich", dist: "0.03 light years" },
+              { src: reelNebula, webm: reelNebulaWebm, poster: astronautImg, name: "Nyx Ember", cat: "Nebula Cluster", dist: "1,250 light years" },
             ];
             const v = scenes[activeVideo];
             return (
@@ -492,6 +496,7 @@ function Index() {
                       onError={() => setVideoReady(true)}
                       className="h-full w-full object-cover"
                     >
+                      <source src={v.webm} type="video/webm" />
                       <source src={v.src} type="video/mp4" />
                     </video>
                     {!videoReady && (
