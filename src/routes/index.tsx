@@ -330,6 +330,59 @@ function Index() {
       </section>
 
       {/* JOURNEY / PARALLAX */}
+      {/* GALAXY */}
+      <section id="galaxy" className="relative overflow-hidden py-32 md:py-48">
+        <Starfield count={70} />
+        <div
+          className="nebula pointer-events-none absolute left-1/2 top-1/2 h-[900px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30 blur-3xl"
+          style={{ background: "radial-gradient(circle, #7c3aed, transparent 65%)" }}
+        />
+        <div className="relative z-10 mx-auto grid max-w-7xl gap-16 px-6 md:grid-cols-2 md:items-center md:px-12">
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1 }}
+          >
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-white/50">
+              ( 003 ) — Deep Field
+            </p>
+            <h2 className="font-serif mt-6 text-5xl leading-[1] tracking-tight md:text-7xl">
+              A spiral of <em className="italic text-blue-300">a hundred</em> billion suns.
+            </h2>
+            <p className="mt-8 max-w-md font-mono text-sm leading-relaxed text-white/60">
+              Andromeda-24 · a barred spiral catalogued on our last long-range sweep.
+              Three exoplanets confirmed in the habitable band, orbiting a young
+              G-type star still wrapped in its birth disk.
+            </p>
+            <dl className="mt-10 grid grid-cols-3 gap-6 font-mono text-xs uppercase tracking-[0.25em] text-white/60">
+              <div>
+                <dt className="text-white/40">Diameter</dt>
+                <dd className="mt-2 font-serif text-2xl normal-case tracking-normal text-white">92k ly</dd>
+              </div>
+              <div>
+                <dt className="text-white/40">Distance</dt>
+                <dd className="mt-2 font-serif text-2xl normal-case tracking-normal text-white">2.4M ly</dd>
+              </div>
+              <div>
+                <dt className="text-white/40">Stars</dt>
+                <dd className="mt-2 font-serif text-2xl normal-case tracking-normal text-white">~100B</dd>
+              </div>
+            </dl>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            className="relative"
+          >
+            <Galaxy stars={240} />
+          </motion.div>
+        </div>
+      </section>
+
       <section id="journey" className="relative min-h-screen overflow-hidden py-32">
         <div className="absolute inset-0">
           <img
