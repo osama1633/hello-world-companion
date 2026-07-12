@@ -5,6 +5,7 @@ import astronautImg from "@/assets/astronaut-portrait.jpg";
 import planetImg from "@/assets/planet.jpg";
 import moonImg from "@/assets/moon-scene.jpg";
 import { Starfield } from "@/components/space/Starfield";
+import { Galaxy } from "@/components/space/Galaxy";
 
 const astronautVideo = "/videos/astronaut-cinematic.mp4";
 const astronautVideoWebm = "/videos/astronaut-cinematic.webm";
