@@ -332,6 +332,7 @@ function Index() {
       {/* JOURNEY / PARALLAX */}
       <section id="journey" className="relative min-h-screen overflow-hidden py-32">
         <div className="absolute inset-0">
+          {/* placeholder to keep patch anchored */}
           <img
             ref={parallaxRef}
             src={moonImg}
