@@ -28,8 +28,13 @@ function Index() {
   const parallaxRef = useRef<HTMLImageElement>(null);
   const [activeVideo, setActiveVideo] = useState<null | 0 | 1 | 2>(null);
   const [videoReady, setVideoReady] = useState(false);
+  const missionVideoRef = useRef<HTMLDivElement>(null);
+  const [missionVideoVisible, setMissionVideoVisible] = useState(false);
 
   useEffect(() => {
+    // Skip mousemove parallax on small/touch devices — it's just extra repaints.
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(hover: none), (max-width: 768px)").matches) return;
     let raf = 0;
     let tx = 0, ty = 0;
     const onMove = (e: MouseEvent) => {
@@ -49,6 +54,23 @@ function Index() {
       window.removeEventListener("mousemove", onMove);
       if (raf) cancelAnimationFrame(raf);
     };
+  }, []);
+
+  // Only mount the mission background video when it scrolls near view.
+  useEffect(() => {
+    const el = missionVideoRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setMissionVideoVisible(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "200px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
   return (
