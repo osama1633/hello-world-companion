@@ -95,7 +95,7 @@ function Index() {
 
       {/* HERO */}
       <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
-        <Starfield count={50} />
+        <Starfield count={30} />
 
         {/* Background astronaut video */}
         <motion.div
@@ -205,7 +205,7 @@ function Index() {
 
       {/* MISSION */}
       <section id="mission" className="relative overflow-hidden py-32 md:py-48">
-        <Starfield count={20} />
+        <Starfield count={12} />
         <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-16 px-6 md:grid-cols-12 md:px-12">
           <motion.div
             initial={{ opacity: 0, y: 60 }}
@@ -289,9 +289,9 @@ function Index() {
 
       {/* PLANETS */}
       <section id="planets" className="relative overflow-hidden py-32 md:py-48">
-        <Starfield count={30} />
+        <Starfield count={18} />
         <div
-          className="nebula pointer-events-none absolute -right-40 top-1/4 h-[800px] w-[800px] rounded-full opacity-40 blur-3xl"
+          className="nebula pointer-events-none absolute -right-40 top-1/4 h-[600px] w-[600px] rounded-full opacity-30 blur-2xl"
           style={{ background: "radial-gradient(circle, #6d28d9, transparent 70%)" }}
         />
         <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12">
@@ -364,9 +364,9 @@ function Index() {
       {/* JOURNEY / PARALLAX */}
       {/* GALAXY */}
       <section id="galaxy" className="relative overflow-hidden py-32 md:py-48">
-        <Starfield count={35} />
+        <Starfield count={18} />
         <div
-          className="nebula pointer-events-none absolute left-1/2 top-1/2 h-[900px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30 blur-3xl"
+          className="nebula pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-25 blur-2xl"
           style={{ background: "radial-gradient(circle, #7c3aed, transparent 65%)" }}
         />
         <div className="relative z-10 mx-auto grid max-w-7xl gap-16 px-6 md:grid-cols-2 md:items-center md:px-12">
@@ -410,7 +410,7 @@ function Index() {
             transition={{ duration: 1.2, ease: "easeOut" }}
             className="relative"
           >
-            <Galaxy stars={140} />
+            <Galaxy stars={90} />
           </motion.div>
         </div>
       </section>
@@ -431,7 +431,7 @@ function Index() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#05060d] via-transparent to-[#05060d]" />
         </div>
-        <Starfield count={25} />
+        <Starfield count={14} />
 
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center md:px-12">
           <motion.p
@@ -483,9 +483,9 @@ function Index() {
 
       {/* CTA */}
       <section id="contact" className="relative overflow-hidden py-32 md:py-48">
-        <Starfield count={20} />
+        <Starfield count={12} />
         <div
-          className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30 blur-3xl"
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-25 blur-2xl"
           style={{ background: "radial-gradient(circle, #3b82f6, transparent 70%)" }}
         />
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center md:px-12">
