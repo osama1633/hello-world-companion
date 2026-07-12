@@ -202,6 +202,33 @@
 }
 .nebula { animation: nebula-drift 20s ease-in-out infinite; }
 
+/* Galaxy */
+@keyframes galaxy-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.galaxy-spin { animation: galaxy-spin 90s linear infinite; transform-origin: center; }
+
+@keyframes galaxy-orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.galaxy-orbit { animation: galaxy-orbit 20s linear infinite; transform-origin: center; }
+
+@keyframes galaxy-star-twinkle {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+.galaxy-star { animation: galaxy-star-twinkle 3.2s ease-in-out infinite; }
+
+.galaxy-wrap { perspective: 1200px; }
+.galaxy-wrap .galaxy-spin { transform: rotateX(62deg); }
+.galaxy-wrap .galaxy-spin { animation-name: galaxy-tilt-spin; }
+@keyframes galaxy-tilt-spin {
+  from { transform: rotateX(62deg) rotate(0deg); }
+  to { transform: rotateX(62deg) rotate(360deg); }
+}
+
 .text-gradient-cosmic {
   background: linear-gradient(135deg, #ffffff 0%, #b7c9ff 40%, #8b5cf6 100%);
   -webkit-background-clip: text;
