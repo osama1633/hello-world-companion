@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import astronautImg from "@/assets/astronaut-portrait.jpg";
 import planetImg from "@/assets/planet.jpg";
@@ -24,19 +24,30 @@ function Index() {
   const heroY = useTransform(scrollYProgress, [0, 0.4], ["0%", "40%"]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
   const titleScale = useTransform(scrollYProgress, [0, 0.4], [1, 1.4]);
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const parallaxRef = useRef<HTMLImageElement>(null);
   const [activeVideo, setActiveVideo] = useState<null | 0 | 1 | 2>(null);
   const [videoReady, setVideoReady] = useState(false);
 
   useEffect(() => {
+    let raf = 0;
+    let tx = 0, ty = 0;
     const onMove = (e: MouseEvent) => {
-      setMouse({
-        x: (e.clientX / window.innerWidth - 0.5) * 2,
-        y: (e.clientY / window.innerHeight - 0.5) * 2,
-      });
+      tx = (e.clientX / window.innerWidth - 0.5) * -20;
+      ty = (e.clientY / window.innerHeight - 0.5) * -20;
+      if (!raf) {
+        raf = requestAnimationFrame(() => {
+          raf = 0;
+          if (parallaxRef.current) {
+            parallaxRef.current.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(1.1)`;
+          }
+        });
+      }
     };
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
 
   return (
@@ -60,7 +71,7 @@ function Index() {
 
       {/* HERO */}
       <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
-        <Starfield count={200} />
+        <Starfield count={90} />
 
         {/* Background astronaut video */}
         <motion.div
@@ -73,7 +84,7 @@ function Index() {
             loop
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
             poster={planetImg}
           >
             <source src={astronautVideoWebm} type="video/webm" />
@@ -170,7 +181,7 @@ function Index() {
 
       {/* MISSION */}
       <section id="mission" className="relative overflow-hidden py-32 md:py-48">
-        <Starfield count={80} />
+        <Starfield count={40} />
         <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-16 px-6 md:grid-cols-12 md:px-12">
           <motion.div
             initial={{ opacity: 0, y: 60 }}
@@ -219,7 +230,7 @@ function Index() {
                 loop
                 muted
                 playsInline
-                preload="auto"
+                preload="metadata"
                 poster={astronautImg}
                 className="h-[600px] w-full object-cover"
               >
@@ -245,7 +256,7 @@ function Index() {
 
       {/* PLANETS */}
       <section id="planets" className="relative overflow-hidden py-32 md:py-48">
-        <Starfield count={120} />
+        <Starfield count={60} />
         <div
           className="nebula pointer-events-none absolute -right-40 top-1/4 h-[800px] w-[800px] rounded-full opacity-40 blur-3xl"
           style={{ background: "radial-gradient(circle, #6d28d9, transparent 70%)" }}
@@ -321,18 +332,20 @@ function Index() {
       <section id="journey" className="relative min-h-screen overflow-hidden py-32">
         <div className="absolute inset-0">
           <img
+            ref={parallaxRef}
             src={moonImg}
             alt=""
             className="h-full w-full object-cover opacity-60"
             loading="lazy"
             style={{
-              transform: `translate(${mouse.x * -20}px, ${mouse.y * -20}px) scale(1.1)`,
+              transform: "translate3d(0,0,0) scale(1.1)",
               transition: "transform 0.4s ease-out",
+              willChange: "transform",
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#05060d] via-transparent to-[#05060d]" />
         </div>
-        <Starfield count={100} />
+        <Starfield count={50} />
 
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center md:px-12">
           <motion.p
@@ -384,7 +397,7 @@ function Index() {
 
       {/* CTA */}
       <section id="contact" className="relative overflow-hidden py-32 md:py-48">
-        <Starfield count={80} />
+        <Starfield count={40} />
         <div
           className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30 blur-3xl"
           style={{ background: "radial-gradient(circle, #3b82f6, transparent 70%)" }}
