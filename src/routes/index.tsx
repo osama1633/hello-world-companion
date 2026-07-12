@@ -62,6 +62,7 @@ function Index() {
         <nav className="hidden gap-8 font-mono text-xs uppercase tracking-[0.25em] text-white/70 md:flex">
           <a href="#mission" className="hover:text-white">Mission</a>
           <a href="#planets" className="hover:text-white">Planets</a>
+          <a href="#galaxy" className="hover:text-white">Galaxy</a>
           <a href="#journey" className="hover:text-white">Journey</a>
           <a href="#contact" className="hover:text-white">Contact</a>
         </nav>
